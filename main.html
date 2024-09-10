@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bemutatkozó Generátor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        #profile-card {
+            width: 400px;
+            padding: 20px;
+            margin: 20px auto;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+        #profile-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        #profile-card h2 {
+            margin: 10px 0;
+        }
+        input[type="color"] {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bemutatkozó Generátor</h1>
+
+    <div>
+        <label for="name">Név:</label>
+        <input type="text" id="name" placeholder="Add meg a neved">
+    </div>
+    <div>
+        <label for="bio">Bemutatkozás:</label>
+        <textarea id="bio" placeholder="Írj egy rövid bemutatkozást"></textarea>
+    </div>
+    <div>
+        <label for="image-upload">Profilkép:</label>
+        <input type="file" id="image-upload">
+    </div>
+    <div>
+        <label for="bg-color">Háttérszín:</label>
+        <input type="color" id="bg-color" value="#ffffff">
+    </div>
+    <button onclick="generateProfile()">Profil létrehozása</button>
+
+    <div id="profile-card" style="display:none;">
+        <img id="profile-pic" src="" alt="Profilkép">
+        <h2 id="profile-name"></h2>
+        <p id="profile-bio"></p>
+    </div>
+
+    <button id="download-btn" style="display:none;" onclick="downloadPNG()">Letöltés PNG formátumban</button>
+
+    <script>
+        function generateProfile() {
+            const name = document.getElementById('name').value;
+            const bio = document.getElementById('bio').value;
+            const bgColor = document.getElementById('bg-color').value;
+            const fileInput = document.getElementById('image-upload');
+            const profileCard = document.getElementById('profile-card');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profile-pic').src = e.target.result;
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+
+            document.getElementById('profile-name').textContent = name;
+            document.getElementById('profile-bio').textContent = bio;
+            profileCard.style.backgroundColor = bgColor;
+
+            profileCard.style.display = 'block';
+            document.getElementById('download-btn').style.display = 'inline';
+        }
+
+        function downloadPNG() {
+            html2canvas(document.getElementById('profile-card')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'profile.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+</body>
+</html>
