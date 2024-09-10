@@ -6,7 +6,7 @@ body {
 
 .cv-container {
     width: 800px;
-    margin: 0 auto;
+    margin: 20px auto;
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -28,8 +28,8 @@ body {
     text-align: left;
 }
 
-.about, .experience, .education {
-    margin: 20px 0;
+.about {
+    margin-top: 20px;
 }
 
 h2 {
