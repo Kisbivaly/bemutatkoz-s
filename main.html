@@ -7,15 +7,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="cv-container">
+    <h1>Önéletrajz Generátor</h1>
+
+    <!-- Form inputok -->
+    <div>
+        <label for="name-input">Név:</label>
+        <input type="text" id="name-input" placeholder="Add meg a neved">
+    </div>
+
+    <div>
+        <label for="profession-input">Szakma:</label>
+        <input type="text" id="profession-input" placeholder="Add meg a szakmádat">
+    </div>
+
+    <div>
+        <label for="about-input">Magamról:</label>
+        <textarea id="about-input" placeholder="Írj magadról"></textarea>
+    </div>
+
+    <div>
+        <label for="profile-pic-input">Profilkép:</label>
+        <input type="file" id="profile-pic-input">
+    </div>
+
+    <button onclick="generateCV()">Önéletrajz létrehozása</button>
+
+    <div class="cv-container" id="cv-container">
         <div class="header">
             <img id="profile-pic" src="default-profile.png" alt="Profil kép">
             <div class="contact-info">
                 <h1 id="name">Név</h1>
                 <p id="profession">Szakma</p>
-                <p id="phone">Telefonszám: +36 30 000 0000</p>
-                <p id="email">Email: valami@valami.hu</p>
-                <p id="address">Cím: Budapest, 1119</p>
             </div>
         </div>
 
@@ -23,22 +45,11 @@
             <h2>Magamról</h2>
             <p id="about-text">Itt jelenik meg a bemutatkozó szöveg.</p>
         </div>
-
-        <div class="experience">
-            <h2>Szakmai tapasztalat</h2>
-            <ul id="experience-list">
-                <li><strong>2020 - Jelenleg:</strong> Turisztikai asszisztens - Iroda neve</li>
-            </ul>
-        </div>
-
-        <div class="education">
-            <h2>Tanulmányok</h2>
-            <ul id="education-list">
-                <li><strong>2006 - 2008:</strong> Közgazdász - Egyetem neve</li>
-            </ul>
-        </div>
     </div>
 
+    <button id="download-btn" style="display:none;" onclick="downloadPNG()">Letöltés PNG formátumban</button>
+
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </body>
 </html>
